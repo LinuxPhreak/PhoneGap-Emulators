@@ -17,3 +17,7 @@ The Windows Phone Emulator is obviosly the easiest. Mainly because we can easily
 <strong>iPhone/iPod Touch/iPad/iPad Mini</strong>
 <br />
 This is a bit more complicated. The best route I have thought of is using the Web Kit Libraries. 
+
+<strong>Notes to users</strong>
+<br />
+This is still a work in progress. Alot of features currently work for the Windows Phone. However the iPhone, Android Phone, Black Berry Phones have not even been built yet. Not to mention that some of the features in the Windows Phone are still not availible as of this time.

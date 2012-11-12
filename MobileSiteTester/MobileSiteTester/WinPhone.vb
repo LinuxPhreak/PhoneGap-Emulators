@@ -5,11 +5,12 @@ Public Class WinPhone
     Public WithEvents oSkype As New SKYPE4COMLib.Skype
 
     Private Sub WinPhone_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Here we hide most of the phone emulator features and make just the piicture boxes visible. Obviosly when a piicture box is clicked all picture boxes disappear and are replaced with the correct features.
         tbNumber.Visible = False
         cbAction.Visible = False
         wbIEMobi.Navigate(ControlPanel.tbWebLocation.Text)
         wbIEMobi.Hide()
-
+        'Here we check to see if their are settings stored in the registry. If their are then we load them into labels that the user wont ever see...
         Dim regemail As String
         Dim reguname As String
         Dim regPW As String
@@ -31,6 +32,7 @@ Public Class WinPhone
     End Sub
 
     Private Sub pbxIE_Click(sender As Object, e As EventArgs) Handles pbxIE.Click
+        'This is where we will fire up the Internet Explorer Mobile. 
         pbxIE.Visible = False
         pbxDialer.Visible = False
         pbxSettings.Visible = False
@@ -42,6 +44,7 @@ Public Class WinPhone
     End Sub
 
     Private Sub wbIEMobi_DocumentCompleted(sender As Object, e As WebBrowserDocumentCompletedEventArgs) Handles wbIEMobi.DocumentCompleted
+        'Since this is supposed to be a phone we need to add features that phone web browsers will support. We will add more in the future as needed. 
         Dim link As HtmlElement
         Dim links As HtmlElementCollection = wbIEMobi.Document.Links
 
@@ -169,9 +172,11 @@ Public Class WinPhone
 
     Private Sub cbAction_Click(sender As Object, e As EventArgs) Handles cbAction.Click
         If cbAction.Visible = True And cbAction.Text = "Call" Then
+            'Here the Emulator will require Skype to be running. This will make a call to a phone number...
             oSkype.PlaceCall(tbNumber.Text)
             cbAction.Text = "End"
         ElseIf cbAction.Visible = True And cbAction.Text = "Send" And tbSubject.Visible = True Then
+            'Now lets test the E-Mail functionality on our phone gap site. This section does just that.
             Dim email As New MailMessage
             Dim mailfrom As String
             Dim mailto As String
@@ -206,6 +211,7 @@ Public Class WinPhone
             SMTP.Send(email)
             MessageBox.Show("Message Sent")
         ElseIf cbAction.Visible = True And cbAction.Text = "Send" And tbSubject.Visible = False Then
+            'The idea behind this section is mainly to use the SMS Gateways and using the same E-Mail Form. Since their will only always be just one phone. We can try to send the same message to all of of the SMS gateways for that number. Obviously only one message will ever be recieved and the sender of the message will get a whole bunch of delivery failure messages. But at least one will get to the actual phone number. 
             Dim email As New MailMessage
             Dim mailfrom As String
             Dim mailto As String
@@ -213,6 +219,7 @@ Public Class WinPhone
             mailfrom = lblAddress.Text
             mailto = tbNumber.Text
             'Now lets add our SMS Gateways
+            'Since this is a SMS and MMS portion their will be no need to add a subject feild. 
             email.Bcc.Add(mailto + "@myboostmobile.com")
             email.Bcc.Add(mailto + "@vtext.com")
             email.Bcc.Add(mailto + "@sms.airfiremobile.com")
@@ -291,10 +298,12 @@ Public Class WinPhone
     End Sub
 
     Private Sub lblClose_Click(sender As Object, e As EventArgs) Handles lblClose.Click
+        'This is the button the exits the Emulator and brings us back to the control panel
         Me.Close()
     End Sub
 
     Private Sub lblBack_Click(sender As Object, e As EventArgs) Handles lblBack.Click
+        'This is the Go Back Button
         pbxIE.Visible = True
         pbxDialer.Visible = True
         pbxSettings.Visible = True
@@ -309,6 +318,7 @@ Public Class WinPhone
     End Sub
 
     Private Sub pbxDialer_Click(sender As Object, e As EventArgs) Handles pbxDialer.Click
+        'If the user wants to use the Dialer he or she is more then able to. He or she just needs to click the dialer button on the emulator.
         pbxIE.Visible = False
         pbxDialer.Visible = False
         pbxSettings.Visible = False
@@ -323,6 +333,7 @@ Public Class WinPhone
     End Sub
 
     Private Sub pbxSMS_Click(sender As Object, e As EventArgs) Handles pbxSMS.Click
+        'If the user just wants to send a text message to a phone he or she can do just that by clicking this picture box.
         pbxIE.Visible = False
         pbxDialer.Visible = False
         pbxSettings.Visible = False
@@ -345,6 +356,7 @@ Public Class WinPhone
     End Sub
 
     Private Sub pbxEMail_Click(sender As Object, e As EventArgs) Handles pbxEMail.Click
+        'If the user wants to send an E-Mail this is where they can do just that.
         pbxIE.Visible = False
         pbxDialer.Visible = False
         pbxSettings.Visible = False

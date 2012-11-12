@@ -5,6 +5,7 @@ Several Phone Emulators for Phone Gap...
 
 These Emulators are intended to be easy for people learning Visual Basic programming. And at the same time serve the purpose of being able to test phone gap projects.
 <br />
+<br />
 <strong>Final releases</strong>
 <br />
 Final releases of these emulators will hopefully be able to test most supported features of Phone Gap projects. Such as reconizing phone numbers and treating them properly. Weather it is to open up the SMS app of a phone or the dialer of a phone. If the phone gap project accesses the photo gallery or camera these emulators should emulate the that as well. 
